@@ -1,0 +1,12 @@
+name: Build website
+
+runs:
+  runs-on: ubuntu-latest
+
+  steps:
+
+  # Check out, and set up the node/ruby infra
+  - uses: actions/checkout@v1
+    with: {fetch-depth: 1, submodules: true}
+  - uses: actions/setup-node@v1
+  - uses: actions/setup-ruby@v1
