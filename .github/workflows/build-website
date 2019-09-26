@@ -1,0 +1,13 @@
+#!/bin/sh
+
+_() { echo "##[debug]running: $PWD\$ $*"; "$@"; }
+
+# Get all the local deps
+_ yarn install
+# danger for PR builds
+if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then _ yarn danger ci; fi
+(cd src/play && _ yarn install && _ yarn setup)
+_ bundle install
+
+# Build
+_ gulp publish
